@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import express from "express";
+import cors from 'cors';
 
 const todoSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -18,7 +19,7 @@ try {
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
+app.use(cors());
 
 
 app.get('/api/todos', async (req, res) => {
@@ -30,6 +31,23 @@ app.get('/api/todos', async (req, res) => {
         res.json(todos);
     } catch (error) {
         console.log("Could not find any todos!!! ", error);
+    }
+});
+
+app.post('/api/todos', async (req, res) => {
+    try {
+        console.log(req.body);
+        const newTodo = new Todo({
+            title: req.body.title,
+            completed: false
+        });
+        if (!newTodo) {
+            res.send("No data was sent");
+        }
+        await newTodo.save();
+        res.json(newTodo);
+    } catch (error) {
+        console.log("Could not save the todo!!! ", error);
     }
 });
 
