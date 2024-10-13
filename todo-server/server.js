@@ -51,6 +51,15 @@ app.post('/api/todos', async (req, res) => {
     }
 });
 
+app.put('/api/todos/:id', async (req, res) => {
+    try {
+        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(todo);
+    } catch (error) {
+        console.log("Could not update todo!!! ", error);
+    }
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
