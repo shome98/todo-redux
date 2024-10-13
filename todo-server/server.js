@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import express from "express";
 
 const todoSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -13,3 +14,8 @@ try {
 } catch (error) {
     console.log("MongoDB connection error!!! ",error)
 }
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors())
