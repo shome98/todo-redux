@@ -1,8 +1,10 @@
-function App() {
-  
+import TodoList from "./components/TodoList"
 
+function App() {
   return (
-    <><h1 className="text-3xl font-bold underline">this is a todo app</h1></>
+    <><div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <TodoList/>
+    </div></>
   )
 }
 
