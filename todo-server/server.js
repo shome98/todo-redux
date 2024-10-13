@@ -21,6 +21,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
 
+app.get('/api/todos', async (req, res) => {
+   try {
+        const todos = await Todo.find();
+        if (!todos) {
+            res.send("Could not find any todos");
+        }
+        res.json(todos);
+    } catch (error) {
+        console.log("Could not find any todos!!! ", error);
+    }
+});
+
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
