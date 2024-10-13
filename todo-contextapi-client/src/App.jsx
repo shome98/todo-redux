@@ -1,8 +1,17 @@
+import TodoList from "./components/TodoList";
+import { TodoProvider } from "./context/TodoContext";
+
 function App() {
 
 
   return (
-    <><h1 className="text-3xl font-bold underline">this is todo for context api</h1></>
+    <>
+      <TodoProvider>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <TodoList/>
+        </div>
+      </TodoProvider>
+    </>
   )
 }
 
