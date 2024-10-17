@@ -7,7 +7,7 @@ export const TodoContext = createContext();
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const uri ='http://localhost:6789/api/todos';
+  const uri ='https://todo-server-expressjs.vercel.app/api/todos';
 
   // Fetch todos from the backend
   const fetchTodos = async () => {
