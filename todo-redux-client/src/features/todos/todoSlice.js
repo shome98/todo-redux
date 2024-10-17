@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const uri ='http://localhost:6789/api/todos';
+const uri ='https://todo-server-expressjs.vercel.app/api/todos';
 // Async Thunks for API calls
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
   const response = await axios.get(uri);
