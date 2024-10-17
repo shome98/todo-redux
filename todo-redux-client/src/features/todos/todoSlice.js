@@ -1,24 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const uri ='http://localhost:6789/api/todos';
 // Async Thunks for API calls
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-  const response = await axios.get('http://localhost:6789/api/todos');
+  const response = await axios.get(uri);
   return response.data;
 });
 
 export const addTodo = createAsyncThunk('todos/addTodo', async (todo) => {
-  const response = await axios.post('http://localhost:6789/api/todos', todo);
+  const response = await axios.post(uri, todo);
   return response.data;
 });
 
 export const updateTodo = createAsyncThunk('todos/updateTodo', async (todo) => {
-  const response = await axios.put(`http://localhost:6789/api/todos/${todo._id}`, todo);
+  const response = await axios.put(`${uri}/${todo._id}`, todo);
   return response.data;
 });
 
 export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (id) => {
-  await axios.delete(`http://localhost:6789/api/todos/${id}`);
+  await axios.delete(`${uri}/${id}`);
   return id;
 });
 

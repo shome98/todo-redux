@@ -7,11 +7,12 @@ export const TodoContext = createContext();
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const uri ='http://localhost:6789/api/todos';
 
   // Fetch todos from the backend
   const fetchTodos = async () => {
     try {
-      const response = await fetch('http://localhost:6789/api/todos');
+      const response = await fetch(uri);
       const data = await response.json();
       setTodos(data);
       setLoading(false);
@@ -23,7 +24,7 @@ export const TodoProvider = ({ children }) => {
   // Add a new todo
   const addTodo = async (title) => {
     try {
-      const response = await fetch('http://localhost:6789/api/todos', {
+      const response = await fetch(uri, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ export const TodoProvider = ({ children }) => {
   // Update a todo
   const updateTodo = async (updatedTodo) => {
     try {
-      await fetch(`http://localhost:6789/api/todos/${updatedTodo._id}`, {
+      await fetch(`${uri}/${updatedTodo._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +59,7 @@ export const TodoProvider = ({ children }) => {
   // Delete a todo
   const deleteTodo = async (id) => {
     try {
-      await fetch(`http://localhost:6789/api/todos/${id}`, {
+      await fetch(`${uri}/${id}`, {
         method: 'DELETE',
       });
       setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
